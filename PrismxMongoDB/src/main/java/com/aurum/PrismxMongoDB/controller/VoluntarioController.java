@@ -5,12 +5,13 @@ import com.aurum.PrismxMongoDB.repository.VoluntarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*; // Aquí está CrossOrigin
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/voluntarios")
+@CrossOrigin(origins = "*") // <--- ¡AGREGA ESTA LÍNEA! Permite conexiones desde cualquier lado
 public class VoluntarioController {
 
     @Autowired

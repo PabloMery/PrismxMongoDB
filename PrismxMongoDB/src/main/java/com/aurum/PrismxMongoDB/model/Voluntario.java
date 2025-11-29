@@ -98,5 +98,12 @@ public class Voluntario {
     private String resumenPerfil;
     private String sugerenciaRol;
 
+    public String getNombre() {
+        String nombreCompleto = (nombres != null ? nombres : "");
+        if (apellidoPaterno != null) {
+            nombreCompleto += " " + apellidoPaterno;
+        }
+        return nombreCompleto.trim();
+    }
     
 }

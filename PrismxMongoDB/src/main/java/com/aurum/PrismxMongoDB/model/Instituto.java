@@ -3,12 +3,9 @@ package com.aurum.PrismxMongoDB.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonAlias;
-
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Document(collection = "institutos")
 public class Instituto {
 
@@ -33,13 +30,14 @@ public class Instituto {
     @JsonAlias({"TelefonoInstituto", "telefono"})
     private String telefono;
 
+    // CAMBIO: De Integer a String para soportar "NULL"
     @JsonAlias({"RegionId", "regionId"})
-    private Integer regionId;
+    private String regionId;
     
     @JsonAlias({"Activo", "activo"})
     private String activo;
 
-    // --- GETTERS Y SETTERS MANUALES (Obligatorios si falla Lombok) ---
+    // --- GETTERS Y SETTERS ---
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -61,8 +59,8 @@ public class Instituto {
     public String getTelefono() { return telefono; }
     public void setTelefono(String telefono) { this.telefono = telefono; }
 
-    public Integer getRegionId() { return regionId; }
-    public void setRegionId(Integer regionId) { this.regionId = regionId; }
+    public String getRegionId() { return regionId; }
+    public void setRegionId(String regionId) { this.regionId = regionId; }
 
     public String getActivo() { return activo; }
     public void setActivo(String activo) { this.activo = activo; }

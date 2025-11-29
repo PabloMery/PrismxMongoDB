@@ -107,4 +107,20 @@ public class DataLoadController {
                     .body("Error cargando asistencias: " + e.getMessage());
         }
     }
+    @GetMapping("/institutos")
+    public List<Instituto> listarInstitutos() {
+        return institutoRepo.findAll();
+    }
+
+    // URL: http://localhost:8080/api/load/campanias
+    @GetMapping("/campanias")
+    public List<Campania> listarCampanias() {
+        return campaniaRepo.findAll();
+    }
+
+    // URL: http://localhost:8080/api/load/asistencias
+    @GetMapping("/asistencias")
+    public List<Asistencia> listarAsistencias() {
+        return asistenciaRepo.findAll();
+    }       
 }
