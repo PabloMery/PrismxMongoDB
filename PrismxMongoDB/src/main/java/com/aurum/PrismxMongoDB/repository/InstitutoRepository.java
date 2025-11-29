@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InstitutoRepository extends MongoRepository<Instituto, String> {
-    // Busca un instituto por el ID que viene en el JSON ("Id": "11")
     Instituto findByIdLegado(Long idLegado);
 }

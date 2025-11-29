@@ -3,6 +3,7 @@ package com.aurum.PrismxMongoDB.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,12 +18,18 @@ public class Voluntario {
     private String id; // ID interno de MongoDB
 
     // --- IDENTIFICACIÓN ---
-    @JsonAlias({"Id", "idLegado", "UsuarioId"}) 
+    @JsonAlias({"Id", "IdUsuario", "UsuarioId", "idLegado"}) 
     private Long idLegado;
 
     // --- DATOS PERSONALES ---
-    @JsonAlias({"Nombres", "nombres"})
+    
+    // AQUÍ ESTABA EL ERROR: Agregamos "Nombre" (singular) a la lista de alias
+    @JsonAlias({"Nombres", "nombres", "Nombre", "nombre"})
     private String nombres;
+
+    // Campo auxiliar por si el JSON trae el segundo nombre separado
+    @JsonAlias({"SegundoNombre", "segundoNombre"})
+    private String segundoNombre;
 
     @JsonAlias({"ApellidoP", "apellidoPaterno"})
     private String apellidoPaterno;
@@ -43,10 +50,10 @@ public class Voluntario {
     private String enfermedad;
     
     @JsonAlias({"Salud", "salud"})
-    private String salud; // Nuevo del JSON
+    private String salud;
 
     // --- UBICACIÓN ---
-    @JsonAlias({"RegionPostulante", "region"})
+    @JsonAlias({"RegionPostulante", "Instituto", "region"}) 
     private String region;
 
     @JsonAlias({"ComunaPostulante", "comuna"})
@@ -55,23 +62,41 @@ public class Voluntario {
     @JsonAlias({"InstitutoId", "institutoId"})
     private Integer institutoId;
 
-    // --- PERFIL Y OCUPACIÓN ---
+    // --- PERFIL ---
     @JsonAlias({"Ocupacion", "ocupacion"})
     private String ocupacion;
 
     @JsonAlias({"DetalleOcupacion", "detalleOcupacion"})
     private String detalleOcupacion;
 
-    // --- ESTADO Y GESTIÓN ---
+    @JsonAlias({"Rango de edad. ", "rangoEdad"}) 
+    private String rangoEdad;
+
+    @JsonAlias({"Nivel de formación actual ", "nivelFormacion"})
+    private String nivelFormacion;
+
+    @JsonAlias({"En caso de estudiar, nombrar carrera (CON MAYUSCULA, SIN ACENTO) ", "carrera"})
+    private String carrera;
+
+    @JsonAlias({"¿Cómo te enteraste del Voluntariado Teletón?  ", "fuenteReclutamiento"})
+    private String fuenteReclutamiento;
+
+    // --- EVALUACIÓN Y ESTADO ---
     @JsonAlias({"Estado", "estado"})
-    private String estado; // Ej: "0", "1", "8"
+    private String estado;
+
+    @JsonAlias({"EstadoEvaluacionGrupal", "aprobado", "estadoEvaluacion"}) 
+    private String estadoEvaluacion; 
+
+    @JsonAlias({"Observacion", "observacion"}) 
+    private String observacion;
 
     @JsonAlias({"Activo", "activo"})
-    private String activo; // Ej: "1", "0"
+    private String activo;
 
-    // Campos antiguos que quizás quieras mantener o descartar si no vienen en el nuevo JSON
-    private String rangoEdad;
-    private String nivelFormacion;
-    private String carrera;
+    // --- EXTRAS IA ---
     private String resumenPerfil;
+    private String sugerenciaRol;
+
+    
 }
