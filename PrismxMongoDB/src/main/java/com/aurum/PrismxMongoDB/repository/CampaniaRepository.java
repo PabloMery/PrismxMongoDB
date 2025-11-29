@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CampaniaRepository extends MongoRepository<Campania, String> {
-    Campania findByIdLegado(Long idLegado);
+    
+    // CORREGIDO: Cambiado de Long a String
+    Campania findByIdLegado(String idLegado);
 }

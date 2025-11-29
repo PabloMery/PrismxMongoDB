@@ -8,12 +8,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VoluntarioRepository extends MongoRepository<Voluntario, String> {
     
-    // Buscar por ID del JSON
-    Voluntario findByIdLegado(Long idLegado);
+    // CORREGIDO: Cambiado de Long a String
+    Voluntario findByIdLegado(String idLegado);
 
     // Buscar por Región
     List<Voluntario> findByRegion(String region);
 
-    // Buscar por Rol Sugerido (Coincide con el campo sugerenciaRol del modelo)
+    // Buscar por Rol Sugerido
     List<Voluntario> findBySugerenciaRol(String sugerenciaRol);
 }

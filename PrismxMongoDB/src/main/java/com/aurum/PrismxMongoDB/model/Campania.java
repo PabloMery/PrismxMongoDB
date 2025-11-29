@@ -3,8 +3,10 @@ package com.aurum.PrismxMongoDB.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @NoArgsConstructor
 @Document(collection = "campanias")
 public class Campania {
@@ -12,12 +14,17 @@ public class Campania {
     @Id
     private String id;
 
+    // "Id": "45007" (Identificador único de la fila)
     @JsonAlias({"Id", "id"})
-    private Long idLegado; 
+    private String idLegado; 
 
-    // CAMBIO: String por seguridad
+    // "CampaniaId": "36" (Identificador de agrupación)
     @JsonAlias({"CampaniaId", "campaniaId"})
     private String campaniaId; 
+
+    // "FechaCreacion": "2020-01-27 09:04:58.743" (NUEVO)
+    @JsonAlias({"FechaCreacion", "fechaCreacion"})
+    private String fechaCreacion;
 
     @JsonAlias({"Titulo", "titulo"})
     private String titulo;
@@ -34,54 +41,20 @@ public class Campania {
     @JsonAlias({"Contacto", "contacto"})
     private String contacto;
 
-    // CAMBIO: String para soportar "NULL"
+    // "Tipo": "0" (NUEVO)
+    @JsonAlias({"Tipo", "tipo"})
+    private String tipo;
+
+    // "PersonaId": "72733" (NUEVO)
     @JsonAlias({"PersonaId", "personaId"})
-    private String personaId; 
+    private String personaId;
 
     @JsonAlias({"DireccionInstituto", "direccion"})
     private String direccionInstituto;
 
-    // CAMBIO: String por seguridad
     @JsonAlias({"Cupo", "cupo"})
     private String cupo;
 
     @JsonAlias({"Activo", "activo"})
     private String activo;
-
-    // --- GETTERS Y SETTERS ---
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
-    public Long getIdLegado() { return idLegado; }
-    public void setIdLegado(Long idLegado) { this.idLegado = idLegado; }
-
-    public String getCampaniaId() { return campaniaId; }
-    public void setCampaniaId(String campaniaId) { this.campaniaId = campaniaId; }
-
-    public String getTitulo() { return titulo; }
-    public void setTitulo(String titulo) { this.titulo = titulo; }
-
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
-
-    public String getInicio() { return inicio; }
-    public void setInicio(String inicio) { this.inicio = inicio; }
-
-    public String getFin() { return fin; }
-    public void setFin(String fin) { this.fin = fin; }
-
-    public String getContacto() { return contacto; }
-    public void setContacto(String contacto) { this.contacto = contacto; }
-
-    public String getPersonaId() { return personaId; }
-    public void setPersonaId(String personaId) { this.personaId = personaId; }
-
-    public String getDireccionInstituto() { return direccionInstituto; }
-    public void setDireccionInstituto(String direccionInstituto) { this.direccionInstituto = direccionInstituto; }
-
-    public String getCupo() { return cupo; }
-    public void setCupo(String cupo) { this.cupo = cupo; }
-
-    public String getActivo() { return activo; }
-    public void setActivo(String activo) { this.activo = activo; }
 }

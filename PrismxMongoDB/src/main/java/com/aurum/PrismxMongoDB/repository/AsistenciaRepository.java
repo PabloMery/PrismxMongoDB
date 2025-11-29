@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AsistenciaRepository extends MongoRepository<Asistencia, String> {
-    Asistencia findByIdLegado(Long idLegado);
+    
+    // CORREGIDO: Cambiado de Long a String
+    Asistencia findByIdLegado(String idLegado);
 }
