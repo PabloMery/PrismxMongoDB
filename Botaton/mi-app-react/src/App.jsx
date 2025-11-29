@@ -2,7 +2,7 @@ import { useState } from 'react'
 import NavBar from './componentes/NavBar'
 import Footer from './componentes/Footer'
 import GraficosApex from './componentes/Graficos'
-import FiltroResultados from './componentes/Filter'
+
 
 
 function App() {
@@ -11,8 +11,7 @@ function App() {
   return (
 <>
   <NavBar/>
-  <FiltroResultados/>
-  <Filter/>
+  <GraficosApex/>
   <Footer/>
 </>
   )
