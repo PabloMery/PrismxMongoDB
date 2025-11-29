@@ -30,7 +30,6 @@ public class VoluntarioController {
         return repositorio.save(voluntario);
     }
 
-    // Para ver los datos desde tu navegador
     @GetMapping
     public List<Voluntario> listarTodos() {
         return repositorio.findAll();

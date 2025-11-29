@@ -1,10 +1,16 @@
 package com.aurum.PrismxMongoDB.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Document(collection = "voluntarios_360") // Nombre de la colección en Atlas
 public class Voluntario {
 

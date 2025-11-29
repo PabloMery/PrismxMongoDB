@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 public class MongoConfig {
 
     // Tu cadena de conexión Hardcoded (La que SÍ funciona)
-    private static final String CONNECTION_STRING = "mongodb+srv://PabloMery:Pablo12@cluster0.2qo3nwl.mongodb.net/teleton_db?retryWrites=true&w=majority&appName=Cluster0";
+    private static final String CONNECTION_STRING = "mongodb+srv://PabloMery:12345@cluster0.2qo3nwl.mongodb.net/teleton_db?retryWrites=true&w=majority&appName=Cluster0";
 
     @Bean
     public MongoClient mongoClient() {
