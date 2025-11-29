@@ -1,6 +1,0 @@
-npm install apexcharts react-apexcharts
-
-npm install bootstrap  para bootsrap
-npm i @popperjs/core  para que bootsrap funcione 
-
-nmp i react-router-dom para los links 
