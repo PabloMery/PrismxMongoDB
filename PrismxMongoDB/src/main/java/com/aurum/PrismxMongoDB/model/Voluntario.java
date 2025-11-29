@@ -1,44 +1,76 @@
 package com.aurum.PrismxMongoDB.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "voluntarios_360") // Nombre de la colección en Atlas
+@Document(collection = "voluntarios_360")
 public class Voluntario {
 
     @Id
-    private String id; // ID interno de Mongo
+    private String id; // ID interno de MongoDB (Auto-generado)
 
-    // --- 1. DATOS PERSONALES (Usuario.csv) ---
-    private Long idLegado;           // Columna "Id" del Excel
-    private String nombres;          // Columna "Nombres"
-    private String apellidoPaterno;  // Columna "ApellidoP"
-    private String apellidoMaterno;  // Columna "ApellidoM"
-    private String fechaNacimiento;  // Columna "FechaNacimiento"
-    private String region;           // "RegionPostulante"
-    private String comuna;           // "ComunaPostulante"
-    private Integer institutoId;     // Para filtrar por sede
+    // --- IDENTIFICACIÓN ÚNICA (La clave para unir todo) ---
+    // Acepta "Id" (Usuario.csv), "IdUsuario" (Encuesta.csv) o "UsuarioId" (Inscripcion.csv)
+    @JsonAlias({"Id", "IdUsuario", "UsuarioId", "idLegado"}) 
+    private Long idLegado;
 
-    // --- 2. PERFIL (EncuestaCaracterizacion.csv) ---
-    private String rangoEdad;        // "Rango de edad"
-    private String nivelFormacion;   // "Nivel de formación actual"
-    private String carrera;          // "En caso de estudiar..."
-    private String ocupacion;        // "Actividad Ocupacional"
+    // --- CAPA 1: DATOS PERSONALES (Usuario.csv) ---
+    @JsonAlias({"Nombres", "nombres"})
+    private String nombres;
 
-    // --- 3. EVALUACIÓN (EvaluacionGrupal.csv) ---
-    // Blue Prism debe decidir si aprueba o no y enviar true/false
-    private Boolean aprobado;        
-    private String observacion;      // Comentarios del evaluador
+    @JsonAlias({"ApellidoP", "apellidoPaterno"})
+    private String apellidoPaterno;
+
+    @JsonAlias({"ApellidoM", "apellidoMaterno"})
+    private String apellidoMaterno;
+
+    @JsonAlias({"FechaNacimiento", "fechaNacimiento"})
+    private String fechaNacimiento;
+
+    @JsonAlias({"RegionPostulante", "Instituto", "region"}) // "Instituto" a veces trae la región
+    private String region;
+
+    @JsonAlias({"ComunaPostulante", "comuna"})
+    private String comuna;
     
-    // --- 4. DATA ENRIQUECIDA (IA) ---
-    private String resumenPerfil;    // Para que la IA escriba un resumen
-    private String sugerenciaRol;    // Rol sugerido por IA (Líder, Apoyo, etc.)
+    @JsonAlias({"InstitutoId", "institutoId"})
+    private Integer institutoId;
+
+    @JsonAlias({"Enfermedad", "enfermedad"})
+    private String enfermedad;
+
+    // --- CAPA 2: PERFIL (EncuestaCaracterizacion.csv) ---
+    @JsonAlias({"Rango de edad. ", "rangoEdad"}) 
+    private String rangoEdad;
+
+    @JsonAlias({"Nivel de formación actual ", "nivelFormacion"})
+    private String nivelFormacion;
+
+    @JsonAlias({"En caso de estudiar, nombrar carrera (CON MAYUSCULA, SIN ACENTO) ", "carrera"})
+    private String carrera;
+
+    @JsonAlias({"Actividad Ocupacional ", "Ocupacion", "ocupacion"})
+    private String ocupacion;
+    
+    @JsonAlias({"¿Cómo te enteraste del Voluntariado Teletón?  ", "fuenteReclutamiento"})
+    private String fuenteReclutamiento;
+
+    // --- CAPA 3: EVALUACIÓN (EvaluacionGrupal.csv) ---
+    // Blue Prism debe enviar esto cruzado con Inscripción para tener el UsuarioId
+    @JsonAlias({"EstadoEvaluacionGrupal", "aprobado"}) 
+    private String estadoEvaluacion; 
+
+    @JsonAlias({"Observacion", "observacion"}) 
+    private String observacion;
+    
+    // --- EXTRAS (Para IA) ---
+    private String resumenPerfil;
+    private String sugerenciaRol;
 }
