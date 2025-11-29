@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PrismxMongoDbApplication<PrismxMongoDB>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.aurum.PrismxMongoDB.PrismxMongoDbApplication",
+            "projectName": "PrismxMongoDB",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
