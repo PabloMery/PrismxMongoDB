@@ -1,10 +1,11 @@
 package com.aurum.PrismxMongoDB.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @NoArgsConstructor
@@ -13,41 +14,64 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Voluntario {
 
     @Id
-    private String id; // ID interno de Mongo
+    private String id; // ID interno de MongoDB
 
-    // --- 1. IDENTIDAD (Fuente: Voluntariado.Usuario.csv) ---
-    private Long idLegado;           // Columna "Id"
-    private String nombres;          // "Nombres"
-    private String apellidoPaterno;  // "ApellidoP"
-    private String apellidoMaterno;  // "ApellidoM"
-    private String fechaNacimiento;  // "FechaNacimiento"
-    private String genero;           // "Sexo" (Nuevo)
-    private String nacionalidad;     // "Nacionalidad" (Nuevo)
-    private String region;           // "RegionPostulante"
-    private String comuna;           // "ComunaPostulante"
-    private Integer institutoId;     // "InstitutoId"
+    // --- IDENTIFICACIÓN ---
+    @JsonAlias({"Id", "idLegado", "UsuarioId"}) 
+    private Long idLegado;
 
-    // --- 2. PERFIL SOCIODEMOGRÁFICO (Fuente: EncuestaCaracterizacion.csv) ---
-    private String rangoEdad;            // "Rango de edad"
-    private String nivelFormacion;       // "Nivel de formación actual"
-    private String carrera;              // "En caso de estudiar..."
-    private String ocupacion;            // "Actividad Ocupacional"
-    private String tiempoPermanencia;    // "Tiempo de permanencia..." (Clave para fidelización)
-    private String experienciaPrevia;    // "¿Has participado en otro Voluntariado?"
+    // --- DATOS PERSONALES ---
+    @JsonAlias({"Nombres", "nombres"})
+    private String nombres;
 
-    // --- 3. EVALUACIÓN DE COMPETENCIAS (Fuente: EvaluacionGrupal.csv) ---
-    // Estos valores numéricos son vitales para que la IA recomiende roles
-    private Integer scoreTrabajoEquipo;  // Promedio de columnas "TrabajoEnEquipo"
-    private Integer scoreProactividad;   // Promedio de columnas "Proactividad"
-    private Integer scoreEmpatia;        // Promedio de columnas "Empatia"
+    @JsonAlias({"ApellidoP", "apellidoPaterno"})
+    private String apellidoPaterno;
+
+    @JsonAlias({"ApellidoM", "apellidoMaterno"})
+    private String apellidoMaterno;
+
+    @JsonAlias({"FechaNacimiento", "fechaNacimiento"})
+    private String fechaNacimiento;
+
+    @JsonAlias({"Sexo", "sexo"})
+    private String sexo;
+
+    @JsonAlias({"Nacionalidad", "nacionalidad"})
+    private String nacionalidad;
+
+    @JsonAlias({"Enfermedad", "enfermedad"})
+    private String enfermedad;
     
-    private Boolean aprobado;            // "EstadoEvaluacionGrupal"
-    private String observacionEvaluador; // "Observacion"
+    @JsonAlias({"Salud", "salud"})
+    private String salud; // Nuevo del JSON
 
-    // --- 4. DATA ENRIQUECIDA (OUTPUT DE TU IA/RPA) ---
-    // Estos campos los llenarás con la IA después de procesar la data anterior
-    private String resumenPerfil;            // Resumen narrativo generado por IA
-    private String rolSugerido;              // Ej: "Líder de Cuadrilla", "Apoyo Logístico"
-    private Double probabilidadDesercion;    // % de riesgo de que abandone (0.0 a 1.0)
-    private String segmentoFidelizacion;     // Ej: "Héroe", "Comprometido", "Esporádico"
+    // --- UBICACIÓN ---
+    @JsonAlias({"RegionPostulante", "region"})
+    private String region;
+
+    @JsonAlias({"ComunaPostulante", "comuna"})
+    private String comuna;
+    
+    @JsonAlias({"InstitutoId", "institutoId"})
+    private Integer institutoId;
+
+    // --- PERFIL Y OCUPACIÓN ---
+    @JsonAlias({"Ocupacion", "ocupacion"})
+    private String ocupacion;
+
+    @JsonAlias({"DetalleOcupacion", "detalleOcupacion"})
+    private String detalleOcupacion;
+
+    // --- ESTADO Y GESTIÓN ---
+    @JsonAlias({"Estado", "estado"})
+    private String estado; // Ej: "0", "1", "8"
+
+    @JsonAlias({"Activo", "activo"})
+    private String activo; // Ej: "1", "0"
+
+    // Campos antiguos que quizás quieras mantener o descartar si no vienen en el nuevo JSON
+    private String rangoEdad;
+    private String nivelFormacion;
+    private String carrera;
+    private String resumenPerfil;
 }
