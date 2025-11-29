@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PrismxMongoDbApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PrismxMongoDbApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PrismxMongoDbApplication.class, args);
+    }
 
 }
